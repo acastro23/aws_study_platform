@@ -1,0 +1,122 @@
+[
+  {
+    "category": "S3",
+    "question": "Which combination of Amazon S3 features best protects against accidental deletion and lets you restore previous object versions?",
+    "options": [
+      "Lifecycle rules and access logs",
+      "Versioning and MFA delete",
+      "Static website hosting and bucket policies",
+      "Server side encryption and ACLs"
+    ],
+    "answer_index": 1,
+    "explanation": "Enabling versioning preserves older versions of objects, and MFA delete adds an extra confirmation step before deletions."
+  },
+  {
+    "category": "EC2",
+    "question": "You have a predictable workload that runs 24x7 for the next three years. Which EC2 pricing model is most cost effective?",
+    "options": [
+      "On demand Instances",
+      "Spot Instances",
+      "Standard Reserved Instances",
+      "Dedicated Hosts"
+    ],
+    "answer_index": 2,
+    "explanation": "Standard Reserved Instances give significant discounts for long term, steady usage when you can commit to a 1 or 3 year term."
+  },
+  {
+    "category": "VPC",
+    "question": "What is the main purpose of a NAT Gateway in a VPC?",
+    "options": [
+      "Allow public users to reach private subnets directly",
+      "Allow instances in private subnets to access the internet",
+      "Create a VPN connection between two VPCs",
+      "Balance traffic across EC2 instances"
+    ],
+    "answer_index": 1,
+    "explanation": "A NAT Gateway lets instances in private subnets start outbound connections to the internet while remaining unreachable from the internet."
+  },
+  {
+    "category": "RDS",
+    "question": "Which RDS feature lets you restore a database to a specific point in time within the backup retention period?",
+    "options": [
+      "Read replicas",
+      "Automated backups",
+      "Multi AZ deployment",
+      "Manual snapshots only"
+    ],
+    "answer_index": 1,
+    "explanation": "Automated backups capture transaction logs so you can restore the DB instance to any point in time within the retention window."
+  },
+  {
+    "category": "CloudFront",
+    "question": "A company wants to deliver static content (images, CSS, JavaScript) with low latency to users around the world. Which service should they use?",
+    "options": [
+      "Amazon S3 in a single region",
+      "Amazon CloudFront",
+      "Amazon EBS volumes",
+      "Amazon SQS"
+    ],
+    "answer_index": 1,
+    "explanation": "CloudFront is a global content delivery network that caches content at edge locations for low latency access."
+  },
+  {
+    "category": "Route 53",
+    "question": "You want to route users to the AWS region that gives them the lowest latency automatically. Which Route 53 routing policy should you use?",
+    "options": [
+      "Simple routing",
+      "Weighted routing",
+      "Latency based routing",
+      "Geolocation routing"
+    ],
+    "answer_index": 2,
+    "explanation": "Latency based routing directs users to the region where Route 53 detects the lowest latency between users and your application."
+  },
+  {
+    "category": "IAM",
+    "question": "Which approach follows IAM security best practices for a new application running on EC2?",
+    "options": [
+      "Use the root account access keys in the application",
+      "Create a single admin IAM user and share the credentials",
+      "Attach an IAM role with least privilege permissions to the EC2 instances",
+      "Store long lived access keys in the application source code"
+    ],
+    "answer_index": 2,
+    "explanation": "Using IAM roles with least privilege permissions avoids hard coded credentials and limits what the instance can do."
+  },
+  {
+    "category": "SQS",
+    "question": "Your application needs to decouple components so that producers can send work items and consumers can process them independently. Which service is the best fit?",
+    "options": [
+      "Amazon SNS",
+      "Amazon SQS",
+      "Amazon CloudWatch",
+      "Amazon EFS"
+    ],
+    "answer_index": 1,
+    "explanation": "Amazon SQS is a fully managed message queue that lets you decouple and scale producer and consumer components."
+  },
+  {
+    "category": "Lambda",
+    "question": "Which statement best describes how AWS Lambda scales when your function is invoked more frequently?",
+    "options": [
+      "You must manually launch more Lambda instances",
+      "Lambda automatically creates more concurrent executions as needed",
+      "Lambda can only run one invocation at a time per function",
+      "You must attach an Auto Scaling group to Lambda"
+    ],
+    "answer_index": 1,
+    "explanation": "Lambda automatically scales by running multiple instances of your function code in parallel, up to the configured concurrency limits."
+  },
+  {
+    "category": "CloudWatch",
+    "question": "You want to be notified by email if an EC2 instance CPU utilization stays above 80 percent for 5 minutes. Which combination of services should you use?",
+    "options": [
+      "CloudWatch metric filter and AWS Config",
+      "CloudWatch alarm and Amazon SNS topic",
+      "CloudTrail log and S3 event notification",
+      "Systems Manager and Lambda"
+    ],
+    "answer_index": 1,
+    "explanation": "A CloudWatch alarm can monitor CPU metrics and send a notification to an SNS topic that then delivers email alerts."
+  }
+]
