@@ -118,5 +118,125 @@
     ],
     "answer_index": 1,
     "explanation": "A CloudWatch alarm can monitor CPU metrics and send a notification to an SNS topic that then delivers email alerts."
+  },
+  {
+    "category": "S3",
+    "question": "Amazon S3 is designed for eleven nines of durability. What does this primarily protect against?",
+    "options": [
+      "Short term network outages",
+      "Data loss due to hardware failures",
+      "Application bugs that delete data",
+      "Account level security breaches"
+    ],
+    "answer_index": 1,
+    "explanation": "S3 durability is about protecting stored objects from loss caused by hardware failures through multiple redundant copies."
+  },
+  {
+    "category": "EBS",
+    "question": "Which statement best compares Amazon EBS volumes and instance store volumes for EC2?",
+    "options": [
+      "Both persist independently of the instance lifecycle",
+      "EBS volumes are ephemeral while instance store is persistent",
+      "EBS volumes persist independently while instance store data is lost if the instance stops",
+      "Instance store can be attached to multiple instances while EBS cannot"
+    ],
+    "answer_index": 2,
+    "explanation": "EBS volumes are network attached and persist beyond instance stop or terminate, while instance store volumes are physically attached and data is lost when the instance stops."
+  },
+  {
+    "category": "AutoScaling",
+    "question": "You want your web application to automatically add more EC2 instances when CPU usage is high and remove them when load decreases. Which combination of services should you use?",
+    "options": [
+      "Elastic Load Balancing with Auto Scaling groups",
+      "CloudFront with S3 static hosting",
+      "SNS topics with SQS queues",
+      "RDS Multi AZ with read replicas"
+    ],
+    "answer_index": 0,
+    "explanation": "Using an Application Load Balancer with an Auto Scaling group allows EC2 instances to be added or removed automatically based on demand."
+  },
+  {
+    "category": "DynamoDB",
+    "question": "Which key structure must every DynamoDB table define?",
+    "options": [
+      "A primary key that is either a partition key only or a partition key and sort key",
+      "A foreign key and a composite index",
+      "A global secondary index and a local secondary index",
+      "A primary key consisting of three attributes"
+    ],
+    "answer_index": 0,
+    "explanation": "Every DynamoDB table must have a primary key, which can be simple (partition key) or composite (partition key and sort key)."
+  },
+  {
+    "category": "RDS",
+    "question": "What is the main benefit of configuring an Amazon RDS database for Multi AZ?",
+    "options": [
+      "Improves read performance through additional read only replicas",
+      "Provides automatic failover to a standby in another Availability Zone",
+      "Allows the database to span multiple regions",
+      "Enables automatic schema migrations"
+    ],
+    "answer_index": 1,
+    "explanation": "RDS Multi AZ creates a synchronous standby in another Availability Zone and provides automatic failover for higher availability."
+  },
+  {
+    "category": "S3",
+    "question": "You need to store large amounts of compliance data that is rarely accessed but must be retained for seven years. Which storage class is the most cost effective?",
+    "options": [
+      "S3 Standard",
+      "S3 Intelligent Tiering",
+      "S3 Glacier Deep Archive",
+      "S3 Standard Infrequent Access"
+    ],
+    "answer_index": 2,
+    "explanation": "S3 Glacier Deep Archive is optimized for long term archival of data that is rarely accessed and offers the lowest storage cost."
+  },
+  {
+    "category": "CloudTrail",
+    "question": "Which service should you use to record and review API calls made in your AWS account for security and auditing?",
+    "options": [
+      "Amazon CloudWatch",
+      "AWS Config",
+      "AWS CloudTrail",
+      "AWS Trusted Advisor"
+    ],
+    "answer_index": 2,
+    "explanation": "AWS CloudTrail records API calls and related events for your AWS account and is commonly used for security analysis and auditing."
+  },
+  {
+    "category": "KMS",
+    "question": "You need to manage encryption keys for data stored in multiple AWS services. Which service provides a central place to create and control these keys?",
+    "options": [
+      "AWS Secrets Manager",
+      "AWS Key Management Service",
+      "AWS Systems Manager Parameter Store",
+      "AWS Certificate Manager"
+    ],
+    "answer_index": 1,
+    "explanation": "AWS Key Management Service (KMS) lets you create, manage, and control encryption keys that are used across many AWS services."
+  },
+  {
+    "category": "VPC",
+    "question": "How do security groups and network ACLs differ in an Amazon VPC?",
+    "options": [
+      "Security groups act at the subnet level, network ACLs at the instance level",
+      "Security groups are stateless, network ACLs are stateful",
+      "Security groups act at the instance level, network ACLs act at the subnet level",
+      "Both act at the same level but have different rule limits"
+    ],
+    "answer_index": 2,
+    "explanation": "Security groups are stateful and applied to network interfaces or instances, while network ACLs are stateless and applied to subnets."
+  },
+  {
+    "category": "S3",
+    "question": "Your application running in a private subnet needs to access objects in an S3 bucket without using an internet gateway or NAT Gateway. What should you configure?",
+    "options": [
+      "An S3 access point",
+      "An S3 bucket policy that allows public access",
+      "A VPC endpoint for S3",
+      "A VPN connection to the S3 service"
+    ],
+    "answer_index": 2,
+    "explanation": "A VPC gateway endpoint for S3 allows resources in private subnets to access S3 directly without requiring internet access."
   }
 ]
