@@ -2,10 +2,57 @@
   "acastro23": {
     "badges": {
       "VPC": {
-        "best_score": 50.0
+        "best_score": 100.0
+      },
+      "S3": {
+        "best_score": 100.0
+      },
+      "AutoScaling": {
+        "best_score": 100.0
+      },
+      "CloudFront": {
+        "best_score": 100.0
+      },
+      "CloudTrail": {
+        "best_score": 100.0
+      },
+      "CloudWatch": {
+        "best_score": 100.0
+      },
+      "DynamoDB": {
+        "best_score": 100.0
+      },
+      "EBS": {
+        "best_score": 100.0
+      },
+      "EC2": {
+        "best_score": 100.0
+      },
+      "IAM": {
+        "best_score": 100.0
+      },
+      "KMS": {
+        "best_score": 100.0
+      },
+      "Lambda": {
+        "best_score": 100.0
+      },
+      "RDS": {
+        "best_score": 100.0
+      },
+      "Route 53": {
+        "best_score": 100.0
+      },
+      "SQS": {
+        "best_score": 100.0
       }
     },
+    "total_quizzes": 17,
+    "total_correct": 25
+  },
+  "Alex": {
+    "badges": {},
     "total_quizzes": 1,
-    "total_correct": 1
+    "total_correct": 0
   }
 }
