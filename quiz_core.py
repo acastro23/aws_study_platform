@@ -1,13 +1,8 @@
-# quiz_core.py
-import json
-import random
-
-questions_path = "aws_questions.json"
-passing_score = 80
+import json, random
+from config import QUESTIONS_PATH
 
 
-def load_questions(path=questions_path):
-    """All questions are pulled from the 'aws_questions.json' file."""
+def load_questions(path=QUESTIONS_PATH):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -20,68 +15,105 @@ def ask_question(q):
 
     random.shuffle(options)
 
-    for idx, option_text in enumerate(options, start=1):
-        print(f"{idx}. {option_text}")
+    for idx, option in enumerate(options, start=1):
+        print(f"{idx}. {option}")
 
     while True:
         try:
             choice = int(input("\nEnter your answer: "))
             if 1 <= choice <= len(options):
                 break
-            else:
-                print("Enter a valid number.")
+            print("Enter a valid number.")
         except ValueError:
             print("Enter a number, not text.")
 
     chosen_option = options[choice - 1]
-    is_correct = (chosen_option == correct_option)
+    is_correct = chosen_option == correct_option
 
     if is_correct:
         print("Correct!")
     else:
-        print(f"Incorrect. The correct answer was: {correct_option}")
+        print(f"Incorrect. Correct answer: {correct_option}")
 
     print("Explanation:", q["explanation"])
-    return is_correct
+
+    return is_correct, chosen_option, correct_option
 
 
 def choose_badge(all_questions):
-    """The player should be able to choose the aws domain, known here as badges."""
     domains = sorted({q["category"] for q in all_questions})
-    print("These are the available topics:")
-    for idx, cat in enumerate(domains, start=1):
-        print(f"{idx}. {cat}")
+
+    print("\nAvailable topics:")
+    for i, d in enumerate(domains, start=1):
+        print(f"{i}. {d}")
 
     while True:
         try:
-            choice = int(input("\nPick a badge by number: "))
+            choice = int(input("\nPick a badge: "))
             if 1 <= choice <= len(domains):
                 return domains[choice - 1]
-            else:
-                print("Please enter a valid choice from the list.")
+            print("Invalid choice.")
         except ValueError:
-            print("Please enter a number, not text.")
+            print("Enter a number.")
 
 
-def run_quiz_for_badge(badge_name, all_questions, num_questions=5):
-    """Run a quiz for a particular badge and return (score, total_questions)."""
+def review_missed_questions(missed):
+    print("\n====== Review Missed Questions ======")
+
+    for i, m in enumerate(missed, start=1):
+        print(f"\n[{i}] Topic: {m['category']}")
+        print("Question:", m["question"])
+        print("Your answer:", m["your_answer"])
+        print("Correct answer:", m["correct_answer"])
+        print("Explanation:", m["explanation"])
+        input("\nPress Enter to continue...")
+        print()
+    
+    while True:
+        done = input("Are you done reviewing? (y/n): ").strip().lower()
+        if done in ('y', 'n'):
+            break
+        print("Please enter y for yes or n for no.")
+    
+    if done == "n":
+        review_missed_questions(missed)
+    print("Returning you back to main meun...\n")
+
+
+
+def run_quiz_for_badge(badge_name, all_questions, num_questions):
     badge_questions = [q for q in all_questions if q["category"] == badge_name]
+
     if not badge_questions:
-        print(f"No questions found for badge: {badge_name}")
+        print("No questions found.")
         return 0, 0
 
     random.shuffle(badge_questions)
-    badge_questions = badge_questions[:num_questions]
-    total = len(badge_questions)
-
-    print("\nWelcome to AWS study app")
-    print(f"You will face {total} questions on {badge_name} to earn your badge.\n")
+    quiz_questions = badge_questions[:num_questions]
 
     score = 0
-    for q in badge_questions:
-        if ask_question(q):
-            score += 1
+    missed = []
 
-    print("\nYou have completed the quiz!")
-    print(f"Your final score was {score} / {total}")
-    return score, total
+    print(f"\nStarting {badge_name} quiz ({len(quiz_questions)} questions)\n")
+
+    for q in quiz_questions:
+        is_correct, chosen, correct = ask_question(q)
+        if is_correct:
+            score += 1
+        else:
+            missed.append({
+                "category": q["category"],
+                "question": q["question"],
+                "your_answer": chosen,
+                "correct_answer": correct,
+                "explanation": q["explanation"],
+            })
+
+    print(f"\nFinal Score: {score} / {len(quiz_questions)}")
+
+    if missed:
+        review = input("\nReview missed questions now? (y/n): ").strip().lower()
+        if review == "y":
+            review_missed_questions(missed)
+
+    return score, len(quiz_questions)

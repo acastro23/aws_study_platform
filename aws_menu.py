@@ -1,5 +1,5 @@
-from quiz_core import choose_badge, run_quiz_for_badge, passing_score
-
+from quiz_core import choose_badge, run_quiz_for_badge
+from config import PASSING_SCORE, NUM_QUESTIONS_PER_QUIZ
 
 def show_profile(profile):
     print("\n====== Player Profile ======")
@@ -21,7 +21,7 @@ def show_badges(profile):
         print("You have not earned any badges yet.")
     else:
         for badge, info in profile.badges.items():
-            print(f"{badge} Badge - Best Score: {info['best_score']} percent")
+            print(f"{badge} Badge - Best Score: {info['best_score']} percent")      # show best score for each badge earned
     print("===========================\n")    
 
 
@@ -37,7 +37,7 @@ def main_menu(profile, store, all_questions):
 
         if choice == "1":
             badge_name = choose_badge(all_questions)
-            score, total = run_quiz_for_badge(badge_name, all_questions, num_questions=5)
+            score, total = run_quiz_for_badge(badge_name, all_questions, num_questions=NUM_QUESTIONS_PER_QUIZ)
 
             if total == 0:
                 print("Returning to menu...")
@@ -47,18 +47,18 @@ def main_menu(profile, store, all_questions):
                 badge_name = badge_name,
                 score = score,
                 total = total,
-                pass_percentage = passing_score,
+                pass_percentage = PASSING_SCORE,
             )
             print(f"\nYou scored {percent:.2f}% on the {badge_name} quiz.")
         
-            if percent >= passing_score:
-                if previous_best < passing_score:
+            if percent >= PASSING_SCORE:
+                if previous_best < PASSING_SCORE:
                     # This is a reminder comment of this logic --> this if condition works as it assumes you have not earned a badge yet, hence previous_best would be 0
                     print(f"Good job, {profile.name}! You just earned the {badge_name} badge!\n")
                 else:
                     print(f"You kept your {badge_name} badge abd improved your score!")
             else:
-                if previous_best >= passing_score:
+                if previous_best >= PASSING_SCORE:
                     print(f"You already earned this badge before, and your best score was: {previous_best:.2f}.")
                 else:
                     print("You have not earned this badge. ?Keep trying!")

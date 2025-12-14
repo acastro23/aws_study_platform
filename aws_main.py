@@ -4,13 +4,17 @@ from aws_menu import main_menu
 
 
 def main():
-    store = ProfileStore()
+    """
+    The basic rundown:
+        A user enters their name, then it checks if its a returning user or new user. If it is a returning user, load their badges and output the main_menu() function call.
+        If it is a new user, create a new profile and then load the main_menu() function call.
+    """
+    player_record = ProfileStore()
 
     name = input("Enter your trainer name: ").strip()
     if not name:
         name = "Guest"
-
-    profile = store.get_or_create_player(name)
+    profile = player_record.get_or_create_player(name)
 
     if profile.badges:
         badge_list = ", ".join(sorted(profile.badges.keys()))
@@ -20,7 +24,7 @@ def main():
 
     all_questions = load_questions()
 
-    main_menu(profile, store, all_questions)
+    main_menu(profile, player_record, all_questions)
 
 
 if __name__ == "__main__":

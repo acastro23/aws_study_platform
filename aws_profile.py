@@ -1,10 +1,10 @@
 import json, os
-
-profile_path = "player_profile.json"
+from config import PROFILE_PATH
 
 
 class PlayerProfile:
     def __init__(self, name, badges=None, total_quizzes=0, total_correct=0):
+        """ A Player should have the following attributes: name, badges, total quizzes taken, and total number of questions correct."""
         self.name = name
         self.badges = badges or {}
         self.total_quizzes = total_quizzes
@@ -37,14 +37,14 @@ class PlayerProfile:
         self.total_correct += score
 
         previous_best = self.badges.get(badge_name, {}).get("best_score", 0)
-        if percent > previous_best:
+        if percent > previous_best:         # clarification note: previous_best < passing_score would mean you never earned the badge before
             self.badges[badge_name] = {"best_score": round(percent, 2)}
         return percent, previous_best
 
 
 
 class ProfileStore:
-    def __init__(self, path=profile_path):
+    def __init__(self, path=PROFILE_PATH):
         self.path = path
         self._profiles = self.load_profiles()
 
